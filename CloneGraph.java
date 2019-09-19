@@ -42,4 +42,39 @@ public class CloneGraph {
 	        }
 	        return map.get(node.val);
 	    }
+	 
+
+	     HashMap<Integer,Node> map = new HashMap<>();
+	    public Node cloneGraphWithHashMap(Node node) {
+	        if(node == null) return null;
+	       
+	        Node newNode;
+	        if(!map.containsKey(node.val)){
+	            newNode = new Node(node.val, new ArrayList<Node>());
+	            map.put(node.val, newNode);
+	          
+	        }else{
+	            return map.get(node.val);
+	    
+	        }
+	          for(Node childNode : node.neighbors){
+	            newNode.neighbors.add(cloneGraph(childNode));
+	            }
+	        return newNode;
+	    }
+	
+	 /*class Solution {
+		    Map<Node, Node> map = new HashMap<>();
+		    public Node cloneGraph(Node node) {
+		        if (node == null) return null;
+		        if (map.containsKey(node)) return map.get(node);
+		        Node root = new Node(node.val);
+		        map.put(node, root);
+		        root.neighbors = new ArrayList<>();
+		        for (Node nei : node.neighbors) {
+		            root.neighbors.add(cloneGraph(nei));
+		        }
+		        return root;
+		    }
+		}*/
 }
