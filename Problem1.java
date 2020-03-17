@@ -1,6 +1,6 @@
 // This Solution worked on LeetCode
-// Time Complexity
-// Space Complexity
+// Time Complexity - 2^n worst case
+// Space Complexity - 2^n worst case
 
 //BFS Solution to check at each level if valid paranthesis string is found. Check the next level only if valid paranthesis string is not found at the current level by use of flag. Continue checking other strings at the same level if flag is true so that same length strings can be output.
 
