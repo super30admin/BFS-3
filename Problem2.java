@@ -55,6 +55,8 @@ class Solution {
 
 
 // DFS Solution
+// Time Complexity - O(n) where n is the number of nodes in the graph
+// Space Complexity - O(n)
 
 class Solution {
     HashMap<Integer,Node> map;
