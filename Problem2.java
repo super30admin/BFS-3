@@ -27,6 +27,7 @@ class Node {
     }
 }
 */
+
 //BFS Solution
 class Solution {
     public Node cloneGraph(Node node) {
@@ -49,5 +50,32 @@ class Solution {
             }
         }
         return newNode;
+    }
+}
+
+
+// DFS Solution
+
+class Solution {
+    HashMap<Integer,Node> map;
+    public Node cloneGraph(Node node) {
+        if(node == null)    return null;
+        map = new HashMap<>();
+        dfs(node);
+        return map.get(node.val);
+    }
+    
+    private void dfs(Node node){
+        if(map.containsKey(node.val)){
+           return; 
+        }
+        Node newNode = new Node(node.val,new ArrayList<>());
+        map.put(node.val,newNode);
+        List<Node> neighbor = node.neighbors;
+        for(Node n : neighbor){
+            dfs(n);
+            map.get(node.val).neighbors.add(map.get(n.val));
+        }
+        return;
     }
 }
