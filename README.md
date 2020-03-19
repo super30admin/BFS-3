@@ -1,6 +1,6 @@
 # BFS-3
 
-## Problem1 Remove Invalid Parentheses(https://leetcode.com/problems/remove-invalid-parentheses/)
+## Problem142 Remove Invalid Parentheses(https://leetcode.com/problems/remove-invalid-parentheses/)
 
 Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
 
@@ -24,7 +24,7 @@ Input: ")("
 
 Output: [""]
 
-## Problem2 Clone graph (https://leetcode.com/problems/clone-graph/)
+## Problem143 Clone graph (https://leetcode.com/problems/clone-graph/)
 
 Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph. Each node in the graph contains a val (int) and a list (List[Node]) of its neighbors.
 
