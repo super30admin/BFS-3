@@ -23,6 +23,22 @@ class Solution:
                     q.append(n)
                 seen[curr].neighbors.append(seen[n])
         return copyNode
+ 
+#DFS SOLution:
         
-        
-        
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return None
+        seen={}
+        def dfs(node):
+            if node in seen:return
+            copyNode=Node(node.val)
+            seen[node]=copyNode
+            for n in node.neighbors:
+                dfs(n)
+                seen[node].neighbors.append(seen[n])
+            # return 
+       
+        dfs(node)
+        return seen[node]
