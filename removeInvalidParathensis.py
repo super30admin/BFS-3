@@ -15,23 +15,25 @@ class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
         finalResult = []
         levelStringsSet = set()
+        found = False
         queue = deque([s])
+        levelStringsSet.add(s)
         while (len(queue) > 0):
             levelCount = len(queue)
-            if (len(finalResult) > 0):
-                return finalResult
             for i in range(levelCount):
                 currentString = queue.popleft()
-                if (currentString not in levelStringsSet):
-                    if (self.isvalid(currentString)):
-                        finalResult.append(currentString)
-                    else:
-                        if (len(finalResult) <= 0):
-                            for j in range(len(currentString)):
-                                if (currentString[j] == '(' or currentString[j] == ')'):
-                                    child = currentString[: j] + currentString[j+1: ]
-                                    queue.append(child)           
-                levelStringsSet.add(currentString)            
-            levelStringsSet = set()              
+                if (self.isvalid(currentString)):
+                    finalResult.append(currentString)
+                    found = True
+                else:
+                    if (found!= True):
+                        for j in range(len(currentString)):
+                            if (currentString[j].isalpha()) ==True:
+                                continue
+                            child = currentString[: j] + currentString[j+1: ]
+                            if child not in levelStringsSet:
+                                queue.append(child) 
+                                levelStringsSet.add(child)                     
         return finalResult 
+        
         
