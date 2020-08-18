@@ -1,5 +1,5 @@
-// Time Complexity :
-// Space Complexity :
+// Time Complexity : O(V + E) --> where V is the vertices and E is the edges in the graph
+// Space Complexity : O(n) --> where n is number of nodes in the graph
 // Did this code successfully run on Leetcode (133): Yes
 // Any problem you faced while coding this : No
 
