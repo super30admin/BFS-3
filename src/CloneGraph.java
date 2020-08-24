@@ -43,6 +43,7 @@ class Solution {
             Node curr = q.poll();
             
             for(Node child: curr.neighbors){
+            	    //copy and add to q for processsing only if already not copied
                 if(!map.containsKey(child.val)){
                     Node childCopy = new Node(child.val);
                     map.put(child.val, childCopy);
