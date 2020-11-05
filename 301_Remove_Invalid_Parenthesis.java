@@ -9,9 +9,16 @@
         # Optimized approach: 
                               
             # 1. 
-                    A) 
-
-
+                    A) If String is null then add "" to the retult list and return it. (This is the corner case).
+                    B) Now create hasmap and queue. Hashmap to  maintain already clauclated strings. Add string to 
+                       hashmaop and queue.
+                    C) Now.  do the BFS traversal, Poll the element from the queue.
+                    D) Check the validtiy of the sting, if it is valid then add to result and make found to true
+                       found will avoud further traversal of levels.
+                    E) if not found, then remove each characters one by one and make a string of it and addto hashset and 
+                       Queue only if it not part of hashset initially.
+                    F) The validity of the string is calculated by isValid function. Just m,maintain the counter for opening and 
+                       closing brackets. If CLosing found when count== 0 then return false. At the end return count == 0;
     */  
 
 class Solution {

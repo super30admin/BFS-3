@@ -9,7 +9,11 @@
         # Optimized approach: 
                               
             # 1. 
-                    A) 
+                    A) Do the DFGS traversal on the given nodes and create deep copy accordingly.
+                    B) Maintain hashmap of visited node. If node is visited then return the value of that node which 
+                       is nothing but the deepcopy created of it.
+                    C) Now create newNode and add all its neighbours to the arra list
+                    D) At the end, return newNode.
 
 
     */  
