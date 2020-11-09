@@ -1,3 +1,5 @@
+// TC: O(n * 2 ^(n-1)) - n to compare if its valid and 2^n to generate different combinations of substring be deleting parentheses
+// SC: O(2^n) to store values in queue since we have 2^n combination in one time
 import java.util.*;
 
 public class remove_invalid_parentheses {
