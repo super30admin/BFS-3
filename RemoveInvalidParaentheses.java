@@ -50,7 +50,6 @@ public class RemoveInvalidParaentheses {
 			}
 
 		}
-
 		return result;
 	}
 
@@ -74,4 +73,11 @@ public class RemoveInvalidParaentheses {
 
 	}
 
+	
+	public static void main(String[] args) {
+		RemoveInvalidParaentheses val = new RemoveInvalidParaentheses();
+		
+		
+		val.removeInvalidParentheses("()())()");
+	}
 }
