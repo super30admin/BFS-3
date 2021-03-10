@@ -40,7 +40,32 @@ class CloneGraph {
             }                    
         }
         
-        return copyHead;
-        
+        return copyHead;        
     }
+  
+    /*
+      DFS 
+      Time : O(V)
+      Space : O(V)
+      Leetcode : YES
+    */
+  
+    HashMap<Node,Node> map = new HashMap<>();
+    void dfs(Node node){
+        if(map.containsKey(node)) return;
+        
+        Node cloned = new Node(node.val);
+        map.put(node, cloned);
+        
+        for(Node n : node.neighbors){
+            dfs(n);
+            map.get(node).neighbors.add(map.get(n));
+        }
+    }
+    
+     public Node cloneGraph(Node node) {
+         if(node == null ) return node;
+         dfs(node);
+         return map.get(node);
+     }
 }
