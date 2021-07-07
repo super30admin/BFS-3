@@ -1,0 +1,58 @@
+// executed on leet code
+// time complexity = exponential
+class Solution {
+    public boolean isValid(String s)
+    {
+        int count=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)=='(')
+                count++;
+            if(s.charAt(i)==')')
+            {
+                if(count==0) // to check closing before opening
+                    return false;
+                else
+                    count--;
+            }
+        }
+        if(count==0) return true;
+        return false;
+    }
+    public List<String> removeInvalidParentheses(String s) 
+    {
+        List<String> result=new ArrayList<>();
+        Queue<String> q=new LinkedList<>();
+        Set<String> set=new HashSet<>();
+        boolean found=false; // to know at which level to stop
+        if(s==null) return result;
+        q.add(s);
+        set.add(s);
+        while(!q.isEmpty())
+        {
+            String str=q.poll();
+            if(isValid(str))
+            {
+                found=true;
+                result.add(str);
+            }
+            if(!found)
+            {
+                for(int i=0;i<str.length();i++)
+                {
+                    if(str.charAt(i)!=')' &&str.charAt(i)!='(')
+                    {
+                        continue; // if alpha-numeric then ignore
+                    }
+                    String temp=str.substring(0,i)+str.substring(i+1);
+                    if(!set.contains(temp))
+                    {
+                        set.add(temp);
+                        q.add(temp);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
