@@ -35,18 +35,17 @@ public:
         }
         return ans;
     }
-    int isValid(string curr){
+    bool isValid(string curr){
         int count = 0;
-        int paranth = 0;
         for(int i = 0;i< curr.length();i++){
             if(curr[i] == ')'){
-                if(count == 0) return -1;
-                paranth++;
+                if(count == 0) return false;
+                count--;
             }
             else if (curr[i] == '('){
                 count++;
             }
         }
-        return paranth;
+        return count == 0;
     }
 };
