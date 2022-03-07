@@ -1,0 +1,74 @@
+//TN: O(n)
+//SC:_ O(n)
+class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        
+        HashSet<String> set = new HashSet<>();
+        List<String> result = new ArrayList<>();
+        
+        Queue<String> queue = new LinkedList<>();
+        queue.add(s);
+        
+        boolean foundValid = false;
+        
+        while(!queue.isEmpty() && !foundValid)
+        {
+            int size = queue.size();
+            for(int i = 0; i < queue.size(); i++)
+            {
+                String curr = queue.poll();
+                if(isValid(curr))
+                {
+                    result.add(curr);
+                    foundValid = true;
+                }
+                
+                for(int j = 0; j < curr.length(); j++)
+                {
+                    if(curr.charAt(j) == ')' || curr.charAt(j) == '(')
+                    {
+                        String newString = curr.substring(0,j) + curr.substring(j + 1, curr.length());
+                        
+                        if(!set.contains(newString))
+                        {
+                            set.add(newString);
+                            queue.add(newString);
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+        return result;
+        
+    }
+    
+    private boolean isValid(String s)
+    {
+        int length = 0;
+        
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s.charAt(i) == '(')
+            {
+                length++;
+            }
+            
+            else if(s.charAt(i) == ')')
+            {
+                if(length == 0)
+                {
+                    return false;
+                }
+                
+                else
+                {
+                    length--;
+                }
+            }
+        }
+        
+        return length==0;
+    }
+}
