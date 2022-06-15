@@ -44,7 +44,33 @@ public class CloneGraph {
         return map.get(node);
     }
 
+    // DFS Approach
+    public Node cloneGraph_DFS(Node node) {
+        if (node == null) return null;
+        map = new HashMap<>();
+        dfs(node);
+        return map.get(node);
+    }
+
+    private void dfs(Node node) {
+        if(map.containsKey(node)) return;
+
+        cloneDFS(node);
+
+        for(Node n : node.neighbors) {
+            dfs(n);
+            map.get(node).neighbors.add(map.get(n));
+        }
+    }
+
     private Node clone(Node node) {
+        Node copyNode = new Node(node.val);
+        map.put(node, copyNode);
+        return copyNode;
+    }
+
+    private Node cloneDFS(Node node) {
+        if(map.containsKey(node)) return node;
         Node copyNode = new Node(node.val);
         map.put(node, copyNode);
         return copyNode;
