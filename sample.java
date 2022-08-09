@@ -81,4 +81,85 @@ class Solution {
     }
 }
 
-// Your code here along with comments explaining your approach
+
+//****143.301.INVALID PARANTHESIS- BFS SOLUTION****
+// Time Complexity :n factorial
+// Space Complexity :n factorial
+// Did this code successfully run on Leetcode :y
+// Any problem you faced while coding this :n
+
+class Solution {
+    HashSet<String> set;
+    List<String> result;
+    int max;
+    
+    public List<String> removeInvalidParentheses(String s) 
+    {
+        if(s==null) return new ArrayList<>();
+        //Set to make sure that only unique strings are added into the result
+        set=new HashSet<>();
+        //List for storing the result and returning it
+        result=new ArrayList<>();
+        //Calling dfs
+        dfs(s);
+        
+        return result;
+        
+    }
+    
+    private void dfs(String s)
+    {
+        //Base
+        if(set.contains(s)) return;
+        if(s.length()<max) return;
+        
+        //logic
+        set.add(s);
+        if(isvalid(s))
+        {
+            //Add to result
+            if(max!=s.length())
+            {
+                result=new ArrayList<>();
+            }
+            //update the max
+            max=s.length();
+            result.add(s);
+        }
+        else
+        {
+            //if not valid then go to its children
+            for(int i=0;i<s.length();i++)
+            {
+                if(Character.isLetter(s.charAt(i))) continue;
+                String curr=s.substring(0,i)+s.substring(i+1);
+                dfs(curr);
+            }
+        }
+    }
+    
+    
+    
+    public boolean isvalid(String curr)
+    {
+        int count=0;
+        for(int i=0;i<curr.length();i++)
+        {
+            char c=curr.charAt(i);
+            
+            if(Character.isLetter(c)) continue;
+            else if(c=='(')
+            {
+                count++;
+            }
+            else if(c==')')
+            {
+                if(count==0) return false;
+                else count--;
+            }
+        }
+        
+        return count==0;
+        
+    }
+}
