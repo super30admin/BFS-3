@@ -1,0 +1,48 @@
+#Remove Invalid Parentheses
+#tc: O(n)
+#sc: O(1)
+class Solution: 
+    def removeInvalidParentheses(self, s: str) -> List[str]:
+        @lru_cache(None)
+        def dfs(i, nOpen):
+            ans = set()
+            if nOpen < 0:
+                return ans  
+            if i == len(s):
+                if nOpen == 0: ans.add("")  
+                return ans
+
+            if s[i] == '(' or s[i] == ')':  
+                ans.update(dfs(i + 1, nOpen))
+
+            if s[i] == '(':
+                nOpen += 1
+            elif s[i] == ')':
+                nOpen -= 1
+            for suffix in dfs(i + 1, nOpen):  
+                ans.add(s[i] + suffix)
+            return ans
+
+        validParentheses = dfs(0, 0)
+        maxLen = max(map(len, validParentheses))
+        return filter(lambda x: len(x) == maxLen, validParentheses)
+  #Clone Graph  
+  #tc: O(V+E)
+#sc: O(V)
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node: return node
+        
+        q, clones = deque([node]), {node.val: Node(node.val, [])}
+        while q:
+            cur = q.popleft() 
+            cur_clone = clones[cur.val]            
+
+            for ngbr in cur.neighbors:
+                if ngbr.val not in clones:
+                    clones[ngbr.val] = Node(ngbr.val, [])
+                    q.append(ngbr)
+                    
+                cur_clone.neighbors.append(clones[ngbr.val])
+                
+        return clones[node.val]
