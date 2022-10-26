@@ -1,0 +1,32 @@
+class Solution:
+    def removeInvalidParentheses(self, s: str) -> List[str]:
+        def isValid(s):
+            stk = []
+            for i in range(len(s)):
+                if( s[i] == '(' ):
+                    stk.append( (i,'(') )
+                elif( s[i] == ')' ):
+                    if(stk and stk[-1][1] == '('):
+                        stk.pop()
+                    else:
+                        stk.append( (i,')') )
+            return len(stk) == 0, stk
+        def dfs( s, left, right):
+            visited.add(s)
+            if left == 0 and right == 0 and isValid(s)[0]:  res.append(s)
+            for i, ch in enumerate(s):
+                if ch != '(' and ch != ')': continue
+                if (ch == '(' and left == 0) or (ch == ')' and right == 0): continue
+                if s[:i] + s[i+1:] not in visited:
+                    dfs( s[:i] + s[i+1:], left - (ch == '('), right - (ch == ')') )
+        stk = isValid(s)[1]
+        lc = sum([1 for val in stk if val[1] == "("])
+        rc = len(stk) - lc
+        res = []
+        visited = set()
+        dfs(s, lc, rc)
+        return res
+    
+# Time Complexity: O(2^n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
