@@ -1,0 +1,35 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+class Solution:
+    def cloneGraph(self, node: "Node") -> "Node":
+        if not node:
+            return node
+        clone = collections.defaultdict(lambda: None)
+        queue = collections.deque([node])
+        visited = set([node])
+        while queue:
+            for _ in range(len(queue)):
+                c = queue.popleft()
+                if c not in clone:
+                    clone[c] = Node(c.val)
+                for neighbor in c.neighbors:
+                    if neighbor not in clone:
+                        clone[neighbor] = Node(neighbor.val)
+                    clone[c].neighbors.append(
+                        clone[neighbor]
+                    )
+                    if neighbor not in visited:
+                        queue.append(neighbor)
+                        visited.add(neighbor)
+        return clone[node]
+    
+# Time Complexity: O(m+n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
+        
