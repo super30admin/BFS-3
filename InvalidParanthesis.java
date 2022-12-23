@@ -1,4 +1,4 @@
-// Time Complexity :O(L)
+// Time Complexity :O(l*n!)
 // Space Complexity :O(n)
 // Did this code successfully run on Leetcode :
 // Any problem you faced while coding this :
@@ -94,6 +94,8 @@ public class InvalidParanthesis {
 
 /*
  * Approach 2 - DFS
+ * Time Complexity - O(l*n!)
+ * Space Complexity - O(n!)
  * Optimization - If any incoming string's length is less than the length of the string added to the result,
  * then we will not perform DFS on its babies.
  */
