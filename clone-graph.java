@@ -20,6 +20,9 @@ class Node {
 */
 import java.util.*;
 
+//tc is O(v+e)
+//sc is O(v+e)
+
 class Solution {
     HashMap<Node, Node> map;
 
