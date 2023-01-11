@@ -2,8 +2,6 @@ class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
 
         ## Approach 2 : DFS
-        ## T.C = O(2^n)
-        ## S.C = O(n.n)
 
         res = []
         hs = set()
@@ -55,7 +53,6 @@ class Solution:
 
         # Approach 1 : BFS
         # T.C = O(2^n)
-        # S.C = O(n.n)
 
         def is_valid(s):
             cnt = 0
