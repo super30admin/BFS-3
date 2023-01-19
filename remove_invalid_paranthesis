@@ -1,0 +1,58 @@
+//TimeComplexity.  n^n
+//SpaceComplexity. n^n
+
+class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        
+        List<String> list = new ArrayList<>();
+
+        if(s.length() == 0)return list;
+        Queue<String> q = new LinkedList<>();
+        HashSet<String> set = new HashSet<>();
+
+        boolean flag = false;
+        q.add(s);
+        set.add(s);
+        
+        while(!q.isEmpty() && !flag){
+            
+            int size = q.size();
+
+            for(int i = 0 ; i < size; i++){
+                String curr = q.poll();
+                if(isValid(curr)){
+                    flag = true;
+                    list.add(curr);
+                }
+
+                if(!flag){
+                
+                    for(int j = 0; j < curr.length(); j++){
+                        Character c = curr.charAt(j);
+                        if(Character.isLetter(c))continue;
+
+                        String str = curr.substring(0,j) + curr.substring(j+1);
+                        if(!set.contains(str)){
+                         q.add(str);
+                         set.add(str);
+                        }                
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    public boolean isValid(String s){
+        int count = 0;
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(Character.isLetter(c))continue;
+            if(c == '(') count++;
+            if(c == ')')count--;
+            if(count < 0)return false;
+
+        }
+        return count == 0;
+    }
+}

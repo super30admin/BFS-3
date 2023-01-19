@@ -1,0 +1,33 @@
+//TimeComplexity. O(V+E)
+//SpaceComplexity. O(V)
+
+
+class Solution {
+    public Node cloneGraph(Node node) {
+        
+        if(node == null)return null;
+        HashMap<Node,Node> map  = new HashMap<>();
+        Queue<Node> q = new LinkedList<>();
+
+        Node newNode = new Node(node.val);
+        q.add(node);
+        map.put(node,newNode);
+
+        while(!q.isEmpty()){
+
+            Node curr = q.poll();
+            List<Node> neighbors = curr.neighbors;
+
+            for(Node n : neighbors){
+                if(!map.containsKey(n)){
+                    Node deepCopy = new Node(n.val);
+                    map.put(n,deepCopy);
+                    q.add(n);
+                }
+            
+            map.get(curr).neighbors.add(map.get(n));
+            }
+        }
+        return newNode;
+    }
+}
