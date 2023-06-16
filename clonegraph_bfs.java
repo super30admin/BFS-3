@@ -19,7 +19,7 @@ class Node {
 */
 
 //Time Complexity : O(V+E)
-//Space Complexity : O(V+E)
+//Space Complexity : O(V)
 //Did this code successfully run on Leetcode : Yes
 //Any problem you faced while coding this : No
 
