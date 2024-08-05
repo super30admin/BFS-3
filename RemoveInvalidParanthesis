@@ -1,0 +1,93 @@
+BFS: 
+class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        Queue<String> q = new LinkedList<>();
+        HashSet<String> set = new HashSet();
+        List<String> result = new ArrayList<>();
+        q.add(s);
+        boolean flag = false;
+        while(!q.isEmpty()){
+           String curr = q.poll();
+           if(isValid(curr)){
+              flag = true;
+              result.add(curr);
+           }else if(!flag){
+             for(int j =0; j<curr.length(); j++){
+                char c = curr.charAt(j);
+                if(c >= 'a' && c <= 'z'){
+                    continue;
+                }
+                String cur = curr.substring(0,j)+curr.substring(j+1);
+                if(!set.contains(cur)){
+                   set.add(cur);
+                   q.add(cur);
+                }                                    
+             }
+           } 
+        }
+        return result;
+    }
+
+    private boolean isValid(String curr){
+         int count = 0;
+         for(int i =0; i<curr.length(); i++){
+            char c = curr.charAt(i);
+            if(c == '('){
+               count++;
+            }else if(c == ')'){
+                count--;
+                if(count < 0){
+                    return false;
+                }
+            }
+         }
+        return count == 0; 
+    }
+}
+
+****************************************************************************
+DFS: 
+
+class Solution {
+    HashSet<String> set = new HashSet<>(); 
+    List<String> result = new ArrayList<>();
+    int max = 0;
+    public List<String> removeInvalidParentheses(String s) {
+       dfs(s);
+       return result;
+    }
+    private void dfs(String s){
+        if(max > s.length() || set.contains(s)){
+            return;
+        }  
+        set.add(s);      
+        if(isValid(s)){
+           if(max < s.length()){
+            max = s.length();
+            result = new ArrayList<>();
+            result.add(s);
+           }else if(max == s.length()){
+            result.add(s); 
+           }
+        }
+        for(int i =0; i<s.length(); i++){
+            String child = s.substring(0,i)+s.substring(i+1);
+            dfs(child);
+        }
+    }
+
+    private boolean isValid(String s){
+        int count = 0;
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) == '('){
+                count++;
+            }else if(s.charAt(i) == ')'){
+                count--;
+                if(count < 0){
+                   return false;
+                }
+            }
+        }
+        return count == 0;
+    }
+}
