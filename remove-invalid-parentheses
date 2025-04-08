@@ -1,0 +1,58 @@
+// Time Complexity :O(n^n)
+// Space Complexity :O(n^n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:DFS approach where processing by exploring all possiblities and cheking whether the substring is valid or not if its valid then  just adding it to result and doing recusrion for next substring;
+
+class Solution {
+    List<String> result = new ArrayList<>();
+    boolean flag = false;
+    int max;
+
+    public List<String> removeInvalidParentheses(String s) {
+        HashSet<String> set = new HashSet<>();
+        dfs(s, set);
+        return result;
+    }
+
+    public void dfs(String s, HashSet<String> set) {
+        if (s.length() < max){
+            return;
+            }
+        //logic
+        if (isValid(s)) {
+            if (s.length() > max) {
+                  max = s.length();
+                result = new ArrayList<>();
+            }
+            result.add(s);
+        }
+
+        for (int j = 0; j < s.length(); j++) {
+            String sub = s.substring(0, j) + s.substring(j + 1);
+            if (!set.contains(sub)) {
+                set.add(sub);
+                dfs(sub, set);
+            }
+        }
+
+    }
+
+    public boolean isValid(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            Character ch = s.charAt(i);
+            if (Character.isLetter(ch))
+                continue;
+            if (ch == '(') {
+                count++;
+            } else {
+                if (count < 1) {
+                    return false;
+                }
+                count--;
+            }
+        }
+        return count == 0;
+    }
+}

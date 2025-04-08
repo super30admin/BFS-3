@@ -1,0 +1,108 @@
+// Time Complexity :O(V+E)
+// Space Complexity :O(V+E)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:BFS approach,if node is not created already then create new node and putting in hashmap with node and correspondong new node,to get easily wheather its created already or not,instead of reacreating already created nodes
+
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
+*/
+
+class Solution {
+    public Node cloneGraph(Node node) {
+        if (node == null) {
+            return null;
+        }
+        Queue<Node> qu = new LinkedList<>();//to process nodes level by level
+        HashMap<Node, Node> map = new HashMap<>();//to track of created nodes (oldnode,new node)
+        Node newNode = new Node(node.val);
+        qu.add(node);
+        map.put(node, newNode);
+        while (!qu.isEmpty()) {
+            Node polledNode = qu.poll();
+            List<Node> neighbors = polledNode.neighbors;
+            for (Node ne : neighbors) {
+                if (!map.containsKey(ne)) {//if it's a new node then create and add to qu and map as well
+                    Node nNode = new Node(ne.val);
+                    qu.add(ne);
+                    map.put(ne, nNode);
+                }
+                map.get(polledNode).neighbors.add(map.get(ne));//already created then add it to copied node neighbors list
+            }
+
+        }
+        return map.get(node);
+    }
+}
+
+
+
+
+
+// Time Complexity :O(V+E)
+// Space Complexity :O(V+E)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:DFS approach,if node is not created already then create new node and putting in hashmap with node and correspondong new node,to get easily wheather its created already or not,instead of reacreating already created nodes
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
+*/
+
+class Solution {
+    public Node cloneGraph(Node node) {
+        if (node == null) {
+            return null;
+        }
+        HashMap<Node, Node> map = new HashMap<>();//to track of created nodes (oldnode,new node)
+        dfs(node, map);
+        return map.get(node);
+    }
+
+    public void dfs(Node node, HashMap<Node, Node> map) {
+        //base
+        if (map.containsKey(node))//if already created
+            return;
+        //logic
+        Node newNode = new Node(node.val);
+        map.put(node, newNode);//putting ord and new nod einto map
+        List<Node> li = node.neighbor//getting org node neighbors;
+        for (Node ne : li) {
+            dfs(ne, map);//for neighbors
+            map.get(node).neighbors.add(map.get(ne));//adding created node into list of created node as per adjacent list
+        }
+    }
+}
