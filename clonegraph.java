@@ -18,6 +18,10 @@ class Node {
 }
 */
 
+
+//Use DFS to traverse through original graph and create clone nodes accordingly
+//Time Complexity:O(V+E)
+//Space Complexity:O(V)
 class Solution {
     HashMap<Node,Node> map;
     public Node cloneGraph(Node node) {

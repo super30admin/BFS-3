@@ -1,3 +1,6 @@
+//Idea is to use BFS to traverse through the string to find the invalid parenthesis
+//Time Complexity:O(2^n)
+//Space Complexity:o(n*2^n)
 class Solution {
     public List<String> removeInvalidParentheses(String s) {
         List<String> result = new ArrayList<>();
