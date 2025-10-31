@@ -1,0 +1,58 @@
+// Time Complexity : O(2^n)
+// Space Complexity : O(2^n)
+
+// Using BFS remove each character if it is not an alphabet and check if it is a valid parentheses
+// If it is then don't check for next levels
+// Avoid duplicates using a hash set
+
+class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        Queue<String> q = new LinkedList<>();
+        HashSet<String> set = new HashSet<>();
+        List<String> result = new ArrayList<>();
+
+        boolean flag = false;
+        q.add(s);
+
+        while(!q.isEmpty()) {
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                String curr = q.poll();
+                if(isValid(curr)) {
+                    result.add(curr);
+                    flag = true;
+                }
+                if(!flag) {
+                    // Remove each parentheses and check
+                    for(int j = 0; j < curr.length(); j++) {
+                        if(Character.isAlphabetic(curr.charAt(j)))
+                            continue;
+                        String str = curr.substring(0, j) + curr.substring(j+1, curr.length());
+                        if(!set.contains(str)) {
+                            set.add(str);
+                            q.add(str);
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // Check if string is a valid parentheses
+    private boolean isValid(String s) {
+        int count = 0;
+        for(char ch : s.toCharArray()) {
+            if(Character.isAlphabetic(ch))
+                continue;
+            if(ch == '(')
+                count++;
+            else {
+                if(count == 0)
+                    return false;
+                count--;
+            }
+        }
+        return count == 0;
+    }
+}
