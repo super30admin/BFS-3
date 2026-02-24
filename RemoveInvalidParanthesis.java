@@ -1,5 +1,5 @@
-// Time Complexity : O(n*2^n)
-// Space Complexity : O(n*2^n)
+// Time Complexity : O(n!) (number of unique strings formed)
+// Space Complexity : O(n!)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
